@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Out</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="flex justify-center min-h-screen bg-bg-primary">
+    <div class="container w-96 m-auto ">
+        <form method="post">
+            {% csrf_token %}
+            <div class="bg-bg-secondary p-6 rounded-lg shadow-lg">
+                <h2 class="text-4xl font-semibold text-primary-700 mb-4">Log Out?</h2>
+                <p class="text-primary-600">Are you sure you want to log out.</p>
+                <button type="submit" class="w-24 h-12 mt-4 inline-block bg-primary-700 text-white px-4 py-2 rounded hover:bg-primary-700">Log Out</button>
+            </form>
+        </div>
+</body>
+</html>

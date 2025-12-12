@@ -1,0 +1,52 @@
+<!-- Navbar Component -->
+    <nav class="bg-green-700 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <!-- Logo/Brand (Optional, themed for farmers market) -->
+                <div class="flex items-center">
+                    <a href="{% url 'landing-page' %}" class="text-white font-bold text-xl">{{SITE_NAME}}</a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="{% url 'home-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Home</a>
+                    <a href="{% url 'profile-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Profile</a>
+                    <a href="{% url 'about-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">About Us</a>
+                    <a href="{% url 'contact-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Contact Us</a>
+                </div>
+                
+                <!-- Mobile menu button (Hamburger) -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-white hover:text-green-200 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-green-800">
+                <a href="{% url 'home-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="{% url 'profile-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Profile</a>
+                <a href="{% url 'about-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">About Us</a>
+                <a href="{% url 'contact-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Example content below navbar (for demo) -->
+
+
+    <!-- Optional: Simple JS for mobile menu toggle -->
+    <script>
+        const mobileMenuButton = document.querySelector('button[aria-expanded]');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        // Add click event to toggle mobile menu (basic implementation)
+        document.querySelector('button svg').parentElement.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
