@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 def login_form(request):
@@ -13,13 +14,14 @@ def login_form(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f'Welcome Back {user.first_name}')
-                return redirect('profile-page')
+                return redirect('profile-update-page')
     else:
         return render(request, 'authentication/login.html')
 
 def registration_form(request):
     return render(request, 'authentication/register.html')
 
+@login_required
 def logout_form(request):
     if request.method == 'POST':
         logout(request)

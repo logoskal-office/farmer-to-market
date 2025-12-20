@@ -3,9 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Farmers Market Platform - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            100: 'oklch(95% 0.10 155)',
+                            200: 'oklch(88% 0.13 155)',
+                            300: 'oklch(80% 0.15 155)',
+                            400: 'oklch(72% 0.17 155)',
+                            500: 'oklch(62% 0.18 155)',
+                            600: 'oklch(55% 0.19 155)',
+                            700: 'oklch(48% 0.18 155)',
+                            800: 'oklch(40% 0.16 155)',
+                            900: 'oklch(32% 0.14 155)',
+                        },
+                        secondary: {
+                            500: 'oklch(58% 0.12 65)',
+                        },
+                        bg: {
+                            primary: 'oklch(98% 0.03 100)',
+                            secondary: 'oklch(94% 0.06 140)',
+                            muted: 'oklch(90% 0.05 120)',
+                        }
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        bounceSlow: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(98, 180, 108, 0.7)' },
+                            '50%': { boxShadow: '0 0 20px 8px rgba(98, 180, 108, 0)' }
+                        }
+                    },
+                    animation: {
+                        fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+                        fadeIn: 'fadeIn 1s ease-out forwards',
+                        slideInLeft: 'slideInLeft 0.8s ease-out forwards',
+                        slideInRight: 'slideInRight 0.8s ease-out forwards',
+                        bounceSlow: 'bounceSlow 2s infinite',
+                        pulseGlow: 'pulseGlow 2s infinite'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    
+<body class="min-h-screen bg-bg-primary">
+    {% include 'navbar.html' %}
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-b from-bg-muted to-bg-primary py-24 px-4 overflow-hidden">
+        <div class="absolute inset-0 opacity-30">
+            <img src="https://images.stockcake.com/public/f/5/6/f56afa93-0301-4485-aebf-e73d13d527ff_large/bustling-farmers-market-stockcake.jpg" alt="Bustling farmers market" class="w-full h-full object-cover">
+        </div>
+        <div class="relative max-w-6xl mx-auto text-center z-10">
+            <h1 class="text-5xl md:text-6xl font-bold text-primary-700 mb-4 opacity-0 animate-fadeInUp">🌾 Farmers Market Platform</h1>
+            <p class="text-xl md:text-2xl text-primary-600 mb-8 max-w-3xl mx-auto opacity-0 animate-fadeInUp animation-delay-300">
+                Connecting farmers directly with buyers for the freshest local produce, sustainable goods, and vibrant community markets.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center opacity-0 animate-fadeInUp animation-delay-600">
+                <a href="/products" class="group relative overflow-hidden bg-primary-500 hover:bg-primary-600 text-white font-bold py-5 px-10 rounded-full text-xl transition-all duration-500 transform hover:scale-110 shadow-2xl animate-pulseGlow">
+                    <span class="relative z-10">Browse Fresh Products</span>
+                </a>
+                <a href="/seller-signup" class="group relative overflow-hidden bg-white hover:bg-primary-100 text-primary-700 font-bold py-5 px-10 rounded-full text-xl border-4 border-primary-500 transition-all duration-500 transform hover:scale-110 shadow-2xl">
+                    <span class="relative z-10">Sell Your Produce</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Added Content: Gallery + Testimonials -->
+    <section class="py-20 px-4 bg-bg-muted">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-700 text-center mb-12 opacity-0 animate-fadeIn">Experience the Vibrancy of Local Markets</h2>
+            
+            <!-- Image Gallery -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 opacity-0 animate-fadeIn animation-delay-300">
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://www.salon.com/app/uploads/2021/08/farmers-market-produce-0812211-1024x691.jpg" alt="Colorful fresh produce at farmers market" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://thumbs.dreamstime.com/b/bologna-italy-may-colorful-fresh-produce-display-farmers-market-fruits-vegetables-healthy-organic-food-vibrant-320024473.jpg" alt="Vibrant display of tomatoes and lemons" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://friscofreshmarket.com/wp-content/uploads/2023/04/shutterstock_2259192415.jpg" alt="Customers shopping at farmers market" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://c8.alamy.com/comp/2N23Y8E/wicker-basket-with-different-fresh-organic-vegetables-and-fruits-on-wooden-table-against-blurred-green-background-2N23Y8E.jpg" alt="Basket full of organic vegetables and fruits" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://thumbs.dreamstime.com/b/happy-farmer-harvesting-his-rice-field-smiling-excited-young-to-camera-162395721.jpg" alt="Happy farmer harvesting crops" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://thepaleodiet.com/wp-content/uploads/2023/05/woman-selling-produce-at-farmers-market.jpg" alt="Vendor selling fresh produce" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://images.stockcake.com/public/f/5/6/f56afa93-0301-4485-aebf-e73d13d527ff_large/bustling-farmers-market-stockcake.jpg" alt="Bustling farmers market scene" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                    <img src="https://t1.pixers.pics/img-c676e9e9/posters-fresh-organic-vegetables-in-wicker-basket-in-the-garden.jpg?H4sIAAAAAAAAA42PW07EMAxFt9OR0tp5NE66gPmdJVRpkg6FvpQUGLF6UkD8ISF_-NryPdaF1zW7MYKP6xETLFMIc4RxmsuUuxTz9BGr1kqGl65s5wqxqO0tJp-2vaqlZDWXgmlBrBXm0r274lxceqmejmPPHUCWzT49Cq40n8EvGQRyAjTQWuN8HAJZ7kS_1_lwa3Ap1IQ1PVps9vXO8Kz_gw1whHYIfNCDCagG0wuBBVb_Er6wCokpMif6JyYhMjrjHWlaqpJ3K9dH9bzfL_DHz28NxQXXG2gNSoKwwO256q83rZUUltteWT16rdCJkZQnH62NLZlgB-5Gkq4pXz4BhR-l0owBAAA=" alt="Fresh vegetables in wicker basket" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-700">
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-bg-primary p-8 rounded-2xl shadow-xl opacity-0 animate-slideInLeft">
+                    <p class="text-primary-700 italic mb-6">"This platform has transformed how I sell my organic veggies. Direct buyer connections mean better prices and happier customers!"</p>
+                    <div class="flex items-center">
+                        <div class="bg-primary-200 rounded-full w-12 h-12 mr-4"></div>
+                        <div>
+                            <p class="font-semibold text-primary-700">Sarah Thompson</p>
+                            <p class="text-sm text-primary-600">Organic Farmer, California</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-bg-primary p-8 rounded-2xl shadow-xl opacity-0 animate-fadeIn animation-delay-300">
+                    <p class="text-primary-700 italic mb-6">"The freshest produce I've ever had! Knowing exactly where my food comes from makes every meal special."</p>
+                    <div class="flex items-center">
+                        <div class="bg-primary-200 rounded-full w-12 h-12 mr-4"></div>
+                        <div>
+                            <p class="font-semibold text-primary-700">Mike Rivera</p>
+                            <p class="text-sm text-primary-600">Home Cook & Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-bg-primary p-8 rounded-2xl shadow-xl opacity-0 animate-slideInRight">
+                    <p class="text-primary-700 italic mb-6">"Easy to use and great reach. My small farm now supplies restaurants across the state thanks to this platform."</p>
+                    <div class="flex items-center">
+                        <div class="bg-primary-200 rounded-full w-12 h-12 mr-4"></div>
+                        <div>
+                            <p class="font-semibold text-primary-700">Emma Patel</p>
+                            <p class="text-sm text-primary-600">Family Farm Owner, Texas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-700 text-center mb-12 opacity-0 animate-fadeIn">Discover the Best of Local Farming</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-bg-secondary p-10 rounded-2xl shadow-xl text-center opacity-0 animate-slideInLeft hover:transform hover:scale-105 transition-all duration-700 hover:shadow-2xl">
+                    <div class="text-6xl mb-6 animate-bounceSlow">🥬</div>
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Fresh & Local Produce</h3>
+                    <p class="text-primary-600">Shop directly from farmers for the highest quality fruits, vegetables, and artisanal goods.</p>
+                </div>
+                <div class="bg-bg-secondary p-10 rounded-2xl shadow-xl text-center opacity-0 animate-fadeIn animation-delay-300 hover:transform hover:scale-105 transition-all duration-700 hover:shadow-2xl">
+                    <div class="text-6xl mb-6 animate-bounceSlow">🤝</div>
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Support Local Farmers</h3>
+                    <p class="text-primary-600">Build direct connections and help sustainable farming thrive in your community.</p>
+                </div>
+                <div class="bg-bg-secondary p-10 rounded-2xl shadow-xl text-center opacity-0 animate-slideInRight hover:transform hover:scale-105 transition-all duration-700 hover:shadow-2xl">
+                    <div class="text-6xl mb-6 animate-bounceSlow">🚚</div>
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Easy Delivery & Pickup</h3>
+                    <p class="text-primary-600">Convenient options to get your fresh goods delivered or ready for market pickup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="bg-bg-muted py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center opacity-0 animate-fadeInUp">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary-700 mb-6">Join the Fresh Food Movement Today</h2>
+            <p class="text-xl text-primary-600 mb-10">Whether you're a buyer craving farm-fresh goods or a farmer ready to sell — get started now.</p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="/buyer-signup" class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-5 px-12 rounded-full text-xl transition-all duration-500 transform hover:scale-110 shadow-2xl animate-pulseGlow">
+                    Sign Up as Buyer
+                </a>
+                <a href="/seller-signup" class="bg-secondary-500 hover:bg-primary-700 text-white font-bold py-5 px-12 rounded-full text-xl transition-all duration-500 transform hover:scale-110 shadow-2xl">
+                    Sign Up as Seller
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-800 text-white py-10 px-4">
+        <div class="max-w-6xl mx-auto text-center opacity-0 animate-fadeIn animation-delay-300">
+            <p class="mb-4">&copy; 2025 Farmers Market Platform. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center gap-8 text-sm">
+                <a href="/subscribe" class="hover:text-primary-200 transition-colors">Subscribe to Newsletter</a>
+                <a href="#" class="hover:text-primary-200 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-primary-200 transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-primary-200 transition-colors">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .animation-delay-300 {
+            animation-delay: 0.3s;
+        }
+        .animation-delay-600 {
+            animation-delay: 0.6s;
+        }
+    </style>
 </body>
 </html>

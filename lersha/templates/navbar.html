@@ -1,16 +1,22 @@
 <!-- Navbar Component -->
     <nav class="bg-green-700 shadow-lg">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between -mr-36 h-16">
                 <!-- Logo/Brand (Optional, themed for farmers market) -->
                 <div class="flex items-center">
-                    <a href="{% url 'landing-page' %}" class="text-white font-bold text-xl">{{SITE_NAME}}</a>
+                    <a href="{% url 'landing-page' %}" class="-ml-40 text-white font-bold text-xl">{{SITE_NAME}}</a>
                 </div>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex justify-between items-center space-x-8">
                     <a href="{% url 'home-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Home</a>
-                    <a href="{% url 'profile-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Profile</a>
+                    <a href="{% url 'product-list-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Products</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile-update-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Profile</a>
+                    {% endif %}
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'login-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Login</a>
+                    {% endif %}
                     <a href="{% url 'about-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">About Us</a>
                     <a href="{% url 'contact-page' %}" class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Contact Us</a>
                 </div>
@@ -24,13 +30,19 @@
                     </button>
                 </div>
             </div>
-        </div>
-        
+        </div>            
+
         <!-- Mobile Menu (Hidden by default) -->
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 bg-green-800">
                 <a href="{% url 'home-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="{% url 'profile-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Profile</a>
+                <a href="{% url 'product-list-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Products</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile-update-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Profile</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href="{% url 'login-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Login</a>
+                {% endif %}
                 <a href="{% url 'about-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">About Us</a>
                 <a href="{% url 'contact-page' %}" class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Contact Us</a>
             </div>
@@ -49,4 +61,7 @@
         document.querySelector('button svg').parentElement.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+    </script>
+    <script>
+        document.body.style.zoom="80%"
     </script>

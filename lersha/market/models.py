@@ -17,6 +17,8 @@ class Product(models.Model):
     category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
     description = models.TextField(max_length=2000, null=True, blank=True)
     image = models.ImageField(upload_to='images/products/')
+    organic = models.BooleanField(default=False)
+    delivery_available = models.BooleanField(default=False)
     quantity_unit = models.CharField(max_length=50, choices={'Item':'Item', 'KG':'KG', 'Litre':'Litre'}, default='Item')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Price (Birr per unit)')
     stock = models.FloatField()

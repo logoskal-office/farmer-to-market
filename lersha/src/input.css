@@ -17,8 +17,13 @@
   /* Secondary color – earthy brown (soil, wood, harvest) */
   --color-secondary-500: oklch(58% 0.12 65);  /* Warm soil brown */
 
+  --color-error-primary: oklch(50% 0.25 30);        /* Vibrant red-orange for errors */
+  --color-error-primary-dark: oklch(45% 0.20 20);        /* Deep red for serious errors */
+  --color-error-secondary:  oklch(80% 0.30 25);        /* Bright accent for error highlights */
+
   /* Background colors */
   --color-bg-primary:   oklch(98% 0.03 100);   /* Almost white – main page background */
   --color-bg-secondary: oklch(94% 0.06 140);   /* Very light green-gray – cards, sidebars */
   --color-bg-muted:     oklch(90% 0.05 120);   /* Soft muted green – subtle sections */
 }
+

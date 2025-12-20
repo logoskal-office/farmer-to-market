@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - {{ product.name }} | Lersha Farmers Market</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            border: 2px solid #d1d5db;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            width: 140px;
+        }
+        .quantity-btn {
+            background: #f3f4f6;
+            border: none;
+            width: 40px;
+            height: 48px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #374151;
+        }
+        .quantity-btn:hover {
+            background: #e5e7eb;
+        }
+        .quantity-number {
+            width: 60px;
+            text-align: center;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .quantity-number:focus {
+            outline: none;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 0.5rem 0;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        /* Suggested styling for the danger button - add to your CSS if needed */
+        .primary-error {
+            background-color: #dc2626; /* red-600 */
+        }
+        .primary-error:hover {
+            background-color: #b91c1c; /* red-700 */
+        }
+    </style>
+</head>
+<body class="bg-bg-primary font-sans leading-normal tracking-normal min-h-screen flex flex-col">
+    {% include 'navbar.html' %}
+    <section class="py-12 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-8">Edit Your Product Listing</h1>
+
+            <form method="POST" enctype="multipart/form-data" id="editProductForm">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Image -->
+                    <div class="space-y-4">
+                        <label class="font-semibold text-gray-900">Current Product Image</label>
+                        <div class="aspect-square overflow-hidden rounded-xl border-2 border-gray-200 bg-bg-secondary">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover" id="currentImage">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_image">Change Image (optional)</label>
+                            <input type="file" name="image" id="id_image" accept="image/*">
+                            <small class="text-gray-600">Leave blank to keep current image.</small>
+                        </div>
+                    </div>
+
+                    <!-- Product Edit Form -->
+                    <div class="flex flex-col">
+                        <div class="form-group">
+                            <label for="id_name">Product Name *</label>
+                            <input type="text" name="name" id="id_name" value="{{ product.name }}" required>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div class="form-group">
+                                <label for="id_price">Price per Unit *</label>
+                                <input type="number" name="price" id="id_price" step="0.01" min="0" value="{{ product.price }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_quantity_unit">Unit *</label>
+                                <select name="quantity_unit" id="id_quantity_unit" required>
+                                    <option value="">Select unit</option>
+                                    <option value="Item" {% if product.quantity_unit == "Item" %}selected{% endif %}>Item</option>
+                                    <option value="KG" {% if product.quantity_unit == "KG" %}selected{% endif %}>Kg</option>
+                                    <option value="Litre" {% if product.quantity_unit == "Litre" %}selected{% endif %}>Litre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_stock">Available Stock *</label>
+                            <input type="number" name="stock" id="id_stock" step="0.1" min="0" value="{{ product.stock }}" required>
+                            <span class="text-gray-600 ml-2">{{ product.quantity_unit }}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_description">Description</label>
+                            <textarea name="description" id="id_description" required>{% if product.description %}{{ product.description }}{% endif %}</textarea>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="form-group">
+                                <label class="font-medium text-gray-900">Organic Certified?</label>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="organic" id="id_organic" {% if product.organic %}checked{% endif %}>
+                                    <label for="id_organic" class="font-normal">Yes, this product is organic certified</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-medium text-gray-900">Delivery Available?</label>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="delivery_available" id="id_delivery_available" {% if product.delivery_available %}checked{% endif %}>
+                                    <label for="id_delivery_available" class="font-normal">Yes, I can deliver</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <!-- Inside the buttons container -->
+<div class="flex gap-4 mt-10 items-center">
+    <button type="submit"
+            class="bg-primary-500 hover:bg-primary-600 text-white py-4 px-10 rounded-lg font-bold text-lg transition duration-300 flex items-center justify-center shadow-lg">
+        <i class="fas fa-save mr-3"></i> Save Changes
+    </button>
+
+    <a href="{% url 'product-detail-page' product.id %}"
+       class="bg-gray-500 hover:bg-gray-600 text-white py-4 px-10 rounded-lg font-bold text-lg transition duration-300 flex items-center justify-center">
+        <i class="fas fa-times mr-3"></i> Cancel
+    </a>
+                   </div>
+                </div>
+            </form>
+    <!-- Delete Button -->
+    <form method="POST" action="{% url 'farmer-product-delete' product.id %}" style="display: inline;"
+          onsubmit="return confirm('Are you sure you want to permanently delete \"{{ product.name }}\"?\nThis action cannot be undone.');">
+        {% csrf_token %}
+        <button type="submit"
+                class="primary-error text-white py-4 px-10 rounded-lg font-bold text-lg transition duration-300 flex items-center justify-center shadow-lg">
+            <i class="fas fa-trash-alt mr-3"></i> Delete Product
+        </button>
+    </form>
+</div>
+ 
+        </div>
+    </section>
+
+    <script>
+        // Optional: Preview new image when selected
+        document.getElementById('id_image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('currentImage').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        })
+    </script>
+</body>
+</html>
