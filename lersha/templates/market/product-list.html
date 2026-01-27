@@ -20,11 +20,9 @@
         <!-- Filters & Search Bar -->
         <div class="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div class="w-full md:w-96 flex items-center gap-2">
-                <input id="search" type="text" placeholder="Search products..."
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <input id="search" type="text" placeholder="Search products..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                 {% if request.user.is_authenticated and request.user.profile %}
-                <a href="{% url 'farmer-product-create' %}"
-                    class="bg-green-600 text-gray-50 p-4 w-16 h-10 flex items-center justify-center rounded-lg cursor-pointer">
+                <a href="{% url 'farmer-product-create' %}" class="bg-green-600 text-gray-50 p-4 w-16 h-10 flex items-center justify-center rounded-lg cursor-pointer">
                     Add
                 </a>
                 {% endif %}
@@ -32,8 +30,7 @@
 
             <div class="flex flex-wrap gap-4 items-center">
                 <!-- Category -->
-                <select id="category"
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <select id="category" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="">All Categories</option>
                     {% for category in categories %}
                     <option value="{{ category.id }}">{{ category }}</option>
@@ -41,12 +38,10 @@
                 </select>
 
                 <!-- Min Price -->
-                <input type="number" id="price_min" min="0" placeholder="Min price"
-                    class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <input type="number" id="price_min" min="0" placeholder="Min price" class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
 
                 <!-- Max Price -->
-                <input type="number" id="price_max" min="0" placeholder="Max price"
-                    class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <input type="number" id="price_max" min="0" placeholder="Max price" class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
             </div>
         </div>
 
@@ -121,16 +116,14 @@
                         <img src="{{product.image.url}}" alt="Fresh Tomatoes" class="w-full h-56 object-cover">
 
                         {% if product.organic %}
-                        <span
-                            class="absolute top-2 right-2 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Organic</span>
+                        <span class="absolute top-2 right-2 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Organic</span>
                         {% endif %}
                     </div>
                     <div class="p-5">
                         <h3 class="text-xl font-semibold text-gray-800 mb-1">{{product.name}}</h3>
                         <p class="text-gray-600 mb-1">{{product.description|truncatechars:50}}</p>
                         <div class="flex flex-col justify-between items-start gap-2 ">
-                            <span
-                                class="text-xl font-bold text-green-700">${{product.price|intcomma}}/{{product.quantity_unit}}</span>
+                            <span class="text-xl font-bold text-green-700">${{product.price|intcomma}}/{{product.quantity_unit}}</span>
 
                         </div>
                     </div>
@@ -141,16 +134,14 @@
             <!-- Product Card 2 -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1567206563060-55a9af775220?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Carrots" class="w-full h-56 object-cover">
+                    <img src="https://images.unsplash.com/photo-1567206563060-55a9af775220?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Carrots" class="w-full h-56 object-cover">
                 </div>
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Rainbow Carrots</h3>
                     <p class="text-gray-600 mb-3">Sweet and colorful bunch from Sunny Acres</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-green-700">$3.49/bunch</span>
-                        <button
-                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center gap-2">
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center gap-2">
                             <i class="fas fa-cart-plus"></i> Add
                         </button>
                     </div>
@@ -161,18 +152,15 @@
             <!-- Product Card 3 -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1586201375761-8385cb5529d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Honey" class="w-full h-56 object-cover">
-                    <span
-                        class="absolute top-2 right-2 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Local</span>
+                    <img src="https://images.unsplash.com/photo-1586201375761-8385cb5529d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Honey" class="w-full h-56 object-cover">
+                    <span class="absolute top-2 right-2 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Local</span>
                 </div>
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Raw Wildflower Honey</h3>
                     <p class="text-gray-600 mb-3">Pure honey from local beehives</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-green-700">$12.99/jar</span>
-                        <button
-                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center gap-2">
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center gap-2">
                             <i class="fas fa-cart-plus"></i> Add
                         </button>
                     </div>
@@ -182,16 +170,14 @@
             <!-- Product Card 4 -->
             <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                        alt="Apples" class="w-full h-56 object-cover">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Apples" class="w-full h-56 object-cover">
                 </div>
                 <div class="p-5">
                     <h3 class="text-xl font-semibold text-gray-800 mb-2">Honeycrisp Apples</h3>
                     <p class="text-gray-600 mb-3">Crisp and juicy, picked this week</p>
                     <div class="flex justify-between items-center">
                         <span class="text-2xl font-bold text-green-700">$5.99/lb</span>
-                        <button
-                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center gap-2">
+                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300 flex items-center gap-2">
                             <i class="fas fa-cart-plus"></i> Add
                         </button>
                     </div>
@@ -207,8 +193,7 @@
     <div class="mt-10 flex justify-center gap-2">
 
         {% if products.has_previous %}
-        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.previous_page_number }}"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.previous_page_number }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             Prev
         </a>
         {% endif %}
@@ -219,16 +204,14 @@
             {{ num }}
         </span>
         {% else %}
-        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ num }}"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ num }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             {{ num }}
         </a>
         {% endif %}
         {% endfor %}
 
         {% if products.has_next %}
-        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.next_page_number }}"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.next_page_number }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             Next
         </a>
         {% endif %}
