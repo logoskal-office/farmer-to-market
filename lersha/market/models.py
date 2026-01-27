@@ -19,7 +19,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/products/')
     organic = models.BooleanField(default=False)
     delivery_available = models.BooleanField(default=False)
-    quantity_unit = models.CharField(max_length=50, choices={'Item':'Item', 'KG':'KG', 'Litre':'Litre'}, default='Item')
+    quantity_unit = models.CharField(max_length=50, choices=[('Item','Item'), ('KG','KG'), ('Litre','Litre')], default='Item')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Price (Birr per unit)')
     stock = models.FloatField()
     active = models.BooleanField(default=True)
