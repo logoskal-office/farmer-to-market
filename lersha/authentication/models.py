@@ -7,3 +7,6 @@ class LershaUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def has_profile(self):
+        return hasattr(self, 'profile')

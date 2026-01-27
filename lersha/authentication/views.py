@@ -15,8 +15,9 @@ def login_form(request):
                 login(request, user)
                 messages.success(request, f'Welcome Back {user.first_name}')
                 return redirect('profile-update-page')
-    else:
-        return render(request, 'authentication/login.html')
+
+        messages.error(request, 'Invalid credentials')
+    return render(request, 'authentication/login.html')
 
 def registration_form(request):
     return render(request, 'authentication/register.html')

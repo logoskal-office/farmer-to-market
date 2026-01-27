@@ -5,13 +5,14 @@ from .models import Farmer
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from users.models import State, City
-from .forms import FarmerUpdateForm, FarmerUserUpdateForm, ProductUpdateForm, ProductForm
-from market.models import Product, Category
 from django.core.paginator import Paginator
 from django.db.models import Q
+from users.models import State, City
+from market.models import Product, Category
+from .forms import FarmerUpdateForm, FarmerUserUpdateForm, ProductUpdateForm, ProductForm
+from .decorators import is_farmer
 
-@login_required
+@is_farmer
 def profile_update(request):
     if request.method == 'POST':
         form = FarmerUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -37,7 +38,7 @@ def profile(request, pk):
         return redirect('profile-update-page')
     return render(request, 'users/profile.html', context=context)
 
-@login_required
+@is_farmer
 def farmer_products_list(request):
     if request.user.is_authenticated:
         products = Product.objects.order_by('-id')
@@ -84,7 +85,7 @@ def farmer_products_list(request):
             }
         )
 
-@login_required
+@is_farmer
 def farmer_products_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
@@ -114,7 +115,7 @@ def farmer_products_detail(request, pk):
 
     return render(request, 'users/farmer-product-detail.html', context)
 
-@login_required
+@is_farmer
 @require_POST  # Only allow POST requests for security
 def farmer_product_delete(request, product_id):
     """
@@ -136,7 +137,8 @@ def farmer_product_delete(request, product_id):
     # Redirect to a safe place after deletion
     return redirect('farmer-product-list')
 
-def create_product(request):
+@is_farmer
+def farmer_product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
