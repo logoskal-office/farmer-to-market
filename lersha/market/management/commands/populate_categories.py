@@ -5,12 +5,12 @@ category_list = [
     ['Dairy', 'categories/dairy.jpg'],
     ['Vegetables', 'categories/vegetables.jpg'],
     ['Fruits', 'categories/fruits.jpg'],
-    ['Livestock', 'categories/livestock.jpg']
+    ['Livestock', 'categories/livestock.jpg'],
     ['Meats', 'categories/meats.jpg'],
-    ['Herbs', 'categories/herbs.jpg']
+    ['Herbs', 'categories/herbs.jpg'],
     ['Grains', 'categories/grains.jpg'],
     ['Oilseeds', 'categories/oilseeds.jpg'],
-    ['Other', 'categories/others.jpg']
+    ['Other', 'categories/others.jpg'],
 ]
 
 class Command(BaseCommand):

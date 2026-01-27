@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header class="bg-gray-100 mb-1">
+        {% include 'navbar.html' %}
+    </header>
+
+    <section class="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+        <div id="portal" class="w-full max-w-md bg-bg-secondary p-8 rounded-lg shadow-lg">
+            <div class="text-center mb-6">
+                <h1 class="text-4xl font-bold text-primary-700">🌾 Farmer's Portal</h1>
+                <p class="text-primary-600 mt-2">Welcome back, grower. Ready to harvest your day?</p>
+            </div>
+            <form action="#" method="POST">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="rounded-md bg-red-50 p-4 border border-red-200">
+                    <p class="text-sm text-red-700">Wrong username or password. Try again.</p>
+                </div>
+                {% endif %}
+                <div class="mb-4">
+                    <label for="username" class="block text-primary-700 text-sm font-semibold mb-2">Username</label>
+                    <input type="text" id="username" name="username" required
+                        class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 placeholder-primary-400 transition-colors"
+                        placeholder="Your Username">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-primary-700 text-sm font-semibold mb-2">Password</label>
+                    <input type="password" id="password" name="password" required
+                        class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 placeholder-primary-400 transition-colors"
+                        placeholder="Enter your password">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors">
+                    Log In
+                </button>
+            </form>
+            <p class="text-center mt-6 text-sm text-primary-600">
+                New to the portal? <a href="{% url 'register-page' %}"
+                    class="text-primary-500 hover:text-primary-600 font-semibold">Create an
+                    account</a>
+            </p>
+        </div>
+    </section>
+    <script>
+        const sect = document.querySelector('#portal')
+        sect.style.scale = "1.1"
+    </script>
+</body>
+
+</html>

@@ -11,7 +11,7 @@ class Farmer(models.Model):
     image = models.ImageField(upload_to='images/users/' ,null=True, blank=True)
     phone_number = models.CharField(max_length=9, validators=[phone_number_validator])
     address = models.CharField(max_length=255, null=True, blank=True)
-    city = models.ForeignKey('City', null=True, on_delete=models.CASCADE)
+    city = models.ForeignKey('City', null=True, blank=True, on_delete=models.SET_NULL)
     description = models.TextField(null=True, blank=True, max_length=1000)
 
     def calculate_impressions(self, range=30):

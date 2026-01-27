@@ -102,14 +102,15 @@ def farmer_products_detail(request, pk):
             messages.success(request, f"'{product.name}' has been successfully updated.")
             return redirect('farmer-product-detail', pk=product.pk)
         else:
-            messages.error(request, "Please correct the errors in the form.")
+            messages.error(request, "Please correct the errors in the form. " + form.errors.as_text())
     else:
         # GET request - show the current product and pre-filled form
-        form = ProductUpdateForm(instance=product)
+        form = ProductUpdateForm(instance=product, initial={'category': product.category.name})
 
     context = {
         'product': product,
         'form': form,
+        'categories': Category.objects.all(),
         'is_owner': True,  # Useful in template to show edit controls
     }
 
@@ -141,13 +142,20 @@ def farmer_product_delete(request, product_id):
 def farmer_product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
-            form.save()
-            return redirect('product_list')  # Redirect to your product list page
+            product = form.save(commit=False)
+            product.farmer = request.user.profile
+            product.save()
+            return redirect('product-list-page')  # Redirect to your product list page
+        else:
+            messages.error(request, "Please correct the errors in the form." + form.errors.as_text())
     else:
         form = ProductForm()
 
-    return render(request, 'users/farmer-product-create.html', {'form': form})
+    return render(request, 'users/farmer-product-create.html', {'form': form, 'categories': Category.objects.all()})
+
+
 # def subcribe(request):
 #     tx_ref = uuid4()
 #     farmer = request.user.profile.first()

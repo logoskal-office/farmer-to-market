@@ -7,6 +7,7 @@ import users
 
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.utils import timezone
 
 def product_list(request):
     products = Product.objects.order_by('-id')
@@ -46,7 +47,7 @@ def product_list(request):
         request,
         'market/product-list.html',
         {
-            'products': products_page,   # 🔥 MUST be Page object
+            'products': products_page, 
             'categories': categories,
             'querystring': querydict.urlencode(),
         }
@@ -54,4 +55,6 @@ def product_list(request):
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
+    product.impressions.create(time=timezone.now())
+    
     return render(request, 'market/product-detail.html', {'product':product})

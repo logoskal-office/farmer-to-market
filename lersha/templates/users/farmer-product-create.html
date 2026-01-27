@@ -1,101 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Product</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Create Product | Lersha</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body class="bg-bg-primary font-sans min-h-screen">
 
-<header class="bg-gray-100">
-    {% include 'navbar.html' %}
-</header>
+<body>
+    <header class="bg-gray-100 mb-1">
+        {% include 'navbar.html' %}
+    </header>
 
-<main class="max-w-3xl mx-auto px-4 py-12">
-    <div class="text-center mb-10">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Add a New Product</h1>
-        <p class="text-gray-600 text-lg">Fill in the details below to create a new product listing.</p>
-    </div>
+    <section class="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+        <div id="portal" class="w-full max-w-2xl bg-bg-secondary p-8 rounded-lg shadow-lg">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-primary-700">🌾 Add a New Product</h1>
+                <p class="text-primary-600 mt-2">Fill in the details below to list your product on the marketplace.</p>
+            </div>
 
-    <form method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-xl shadow-lg space-y-6">
-        {% csrf_token %}
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
 
-        <!-- Product Name -->
-        <div class="flex flex-col">
-            <label for="id_name" class="mb-2 font-semibold text-gray-700">Product Name *</label>
-            <input type="text" name="name" id="id_name" required
-                   class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                   placeholder="Enter product name">
+                <!-- Product Name -->
+                <div>
+                    <label for="id_name" class="block text-primary-700 text-sm font-semibold mb-2">Product Name
+                        *</label>
+                    <input type="text" name="name" id="id_name" required
+                        class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 placeholder-primary-400 transition-colors"
+                        placeholder="Enter product name">
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="id_description" class="block text-primary-700 text-sm font-semibold mb-2">Description
+                        *</label>
+                    <textarea name="description" id="id_description" rows="4" required
+                        class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 placeholder-primary-400 transition-colors"
+                        placeholder="Describe your product quality, origin, etc."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Price -->
+                    <div>
+                        <label for="id_price" class="block text-primary-700 text-sm font-semibold mb-2">Price (ETB)
+                            *</label>
+                        <input type="number" name="price" id="id_price" min="0" step="0.01" required
+                            class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 placeholder-primary-400 transition-colors"
+                            placeholder="0.00">
+                    </div>
+
+                    <!-- Quantity -->
+                    <div>
+                        <label for="id_stock" class="block text-primary-700 text-sm font-semibold mb-2">Stock
+                            Quantity *</label>
+                        <input type="number" name="stock" id="id_stock" min="0" required
+                            class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 placeholder-primary-400 transition-colors"
+                            placeholder="Amount available">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Unit -->
+                    <div>
+                        <label for="id_quantity_unit" class="block text-primary-700 text-sm font-semibold mb-2">Unit
+                            *</label>
+                        <select name="quantity_unit" id="id_quantity_unit" required
+                            class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 transition-colors">
+                            <option value="" disabled selected>Select unit</option>
+                            <option value="KG">Kilogram (KG)</option>
+                            <option value="Litre">Litre (L)</option>
+                            <option value="Item">Items</option>
+                        </select>
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label for="id_category" class="block text-primary-700 text-sm font-semibold mb-2">Category
+                            *</label>
+                        <select name="category" id="id_category" required
+                            class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 transition-colors">
+                            <option value="" disabled selected>Select category</option>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <!-- Delivery Available -->
+                    <div class="flex items-center">
+                        <input type="checkbox" name="delivery_available" id="id_delivery_available"
+                            class="w-5 h-5 text-primary-600 border-primary-300 rounded focus:ring-primary-500 cursor-pointer transition-colors">
+                        <label for="id_delivery_available"
+                            class="ml-3 block text-primary-700 text-sm font-semibold cursor-pointer">
+                            Delivery Available
+                        </label>
+                    </div>
+
+                    <!-- Organic -->
+                    <div class="flex items-center">
+                        <input type="checkbox" name="organic" id="id_organic"
+                            class="w-5 h-5 text-primary-600 border-primary-300 rounded focus:ring-primary-500 cursor-pointer transition-colors">
+                        <label for="id_organic"
+                            class="ml-3 block text-primary-700 text-sm font-semibold cursor-pointer">
+                            Organic Product
+                        </label>
+                    </div>
+                </div>
+
+
+                <!-- Image Upload -->
+                <div>
+                    <label for="id_image" class="block text-primary-700 text-sm font-semibold mb-2">Product
+                        Image</label>
+                    <input type="file" name="image" id="id_image" accept="image/*"
+                        class="w-full px-4 py-3 border border-primary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white text-primary-900 transition-colors">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex items-center justify-between pt-4">
+                    <button type="submit"
+                        class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-xl">
+                        Create Product
+                    </button>
+                </div>
+            </form>
         </div>
 
-        <!-- Description -->
-        <div class="flex flex-col">
-            <label for="id_description" class="mb-2 font-semibold text-gray-700">Description *</label>
-            <textarea name="description" id="id_description" rows="4" required
-                      class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none resize-none"
-                      placeholder="Describe your product"></textarea>
-        </div>
-
-        <!-- Price -->
-        <div class="flex flex-col">
-            <label for="id_price" class="mb-2 font-semibold text-gray-700">Price ($) *</label>
-            <input type="number" name="price" id="id_price" min="0" step="0.01" required
-                   class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                   placeholder="Enter price">
-        </div>
-
-        <!-- Quantity -->
-        <div class="flex flex-col">
-            <label for="id_quantity" class="mb-2 font-semibold text-gray-700">Quantity *</label>
-            <input type="number" name="quantity" id="id_quantity" min="0" required
-                   class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                   placeholder="Enter quantity">
-        </div>
-
-        <!-- Unit -->
-        <div class="flex flex-col">
-            <label for="id_quantity_unit" class="mb-2 font-semibold text-gray-700">Unit *</label>
-            <select name="quantity_unit" id="id_quantity_unit" required
-                    class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                <option value="">Select unit</option>
-                <option value="item">Item</option>
-                <option value="kg">Kg</option>
-                <option value="litre">Litre</option>
-            </select>
-        </div>
-
-        <!-- Category -->
-        <div class="flex flex-col">
-            <label for="id_category" class="mb-2 font-semibold text-gray-700">Category *</label>
-            <select name="category" id="id_category" required
-                    class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-                <option value="">Select Category</option>
-                {% for category in categories %}
-                <option value="{{ category.id }}">{{ category }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <!-- Product Image -->
-        <div class="flex flex-col">
-            <label for="id_image" class="mb-2 font-semibold text-gray-700">Product Image *</label>
-            <input type="file" name="image" id="id_image" accept="image/*" required
-                   class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none">
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit"
-                class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition">
-            Create Product
-        </button>
-    </form>
-</main>
-
-<footer class="mt-16 py-6 text-center text-gray-500 text-sm">
-    © 2025 Your Company Name. All rights reserved.
-</footer>
+    </section>
 
 </body>
+
 </html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Login Type</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="mb-10">
+        {% include 'navbar.html' %}
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center justify-center min-h-[70vh]">
+            <div class="w-full max-w-2xl text-center">
+
+                <h2 class="text-3xl font-bold mb-2">Select Login Type</h2>
+                <p class="text-gray-500 mb-12">
+                    Please choose how you would like to access the platform.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Farmer -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col">
+                        <i class="bi bi-person-workspace text-5xl text-blue-600 mb-4"></i>
+                        <h4 class="text-lg font-semibold mb-2">Farmer</h4>
+                        <p class="text-sm text-gray-500 flex-grow">
+                            Access your personalized farm management dashboard.
+                        </p>
+                        <a href="{% url 'login-page' %}"
+                            class="mt-6 inline-block w-full rounded-lg bg-blue-600 px-4 py-3 text-white font-medium hover:bg-blue-700 transition">
+                            Login as Farmer
+                        </a>
+                    </div>
+
+                    <!-- Admin -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 flex flex-col">
+                        <i class="bi bi-shield-lock text-5xl text-gray-800 mb-4"></i>
+                        <h4 class="text-lg font-semibold mb-2">Administrator</h4>
+                        <p class="text-sm text-gray-500 flex-grow">
+                            Manage platform users, data, and system configurations.
+                        </p>
+                        <a href="/admin"
+                            class="mt-6 inline-block w-full rounded-lg border border-gray-800 px-4 py-3 font-medium text-gray-800 hover:bg-gray-800 hover:text-white transition">
+                            Login as Admin
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>

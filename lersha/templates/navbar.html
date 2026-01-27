@@ -1,25 +1,32 @@
 <!-- Navbar Component -->
 <nav class="bg-green-700 shadow-lg">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between lg:-mr-36 h-16">
+        <div class="flex justify-between h-16">
             <!-- Logo/Brand (Optional, themed for farmers market) -->
             <div class="flex items-center">
-                <a href="{% url 'landing-page' %}" class="lg:-ml-40 text-white font-bold text-xl">{{SITE_NAME}}</a>
+                <a href="{% url 'landing-page' %}" class="text-white font-bold text-xl">{{SITE_NAME}}</a>
             </div>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex justify-between items-center space-x-8">
+            <div class="hidden md:flex justify-center items-center space-x-8">
                 <a href="{% url 'home-page' %}"
                     class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Home</a>
                 <a href="{% url 'product-list-page' %}"
                     class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Products</a>
                 {% if user.is_authenticated %}
+                {% if not user.is_staff %}
                 <a href="{% url 'profile-update-page' %}"
                     class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Profile</a>
+                {% else %}
+                <a href="/admin"
+                    class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Admin</a>
+                {% endif %}
                 {% endif %}
                 {% if not user.is_authenticated %}
-                <a href="{% url 'login-page' %}"
+                <a href="{% url 'login-choice-page' %}"
                     class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Login</a>
+                <a href="{% url 'register-page' %}"
+                    class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">Register</a>
                 {% endif %}
                 <a href="{% url 'about-page' %}"
                     class="text-white hover:text-green-200 px-3 py-2 rounded-md text-md font-medium transition duration-300">About
@@ -53,8 +60,10 @@
                 class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Profile</a>
             {% endif %}
             {% if not user.is_authenticated %}
-            <a href="{% url 'login-page' %}"
+            <a href="{% url 'login-choice-page' %}"
                 class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Login</a>
+            <a href="{% url 'register-page' %}"
+                class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">Register</a>
             {% endif %}
             <a href="{% url 'about-page' %}"
                 class="text-white block hover:text-green-200 px-3 py-2 rounded-md text-base font-medium">About Us</a>
@@ -65,15 +74,16 @@
 </nav>
 
 
-
+{% if messages %}
 {% for message in messages %}
-<div class="px-4 py-2 mb-4 border-4 border-green-500 bg-green-50 rounded-lg text-center mx-auto">
-    <div class="bg-error-500 text-white p-2 rounded">
+<div class="px-4 py-2 my-4 border-4 border-green-500 bg-green-50 rounded-lg text-center max-w-md mx-auto">
+
+    <div class="bg-error-500 text-blue-500 text-2xl font-bold p-2 rounded">
         {{ message }}
     </div>
 </div>
 {% endfor %}
-
+{% endif %}
 
 <!-- Optional: Simple JS for mobile menu toggle -->
 <script>
