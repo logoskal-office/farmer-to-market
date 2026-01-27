@@ -24,9 +24,9 @@ def profile_update(request):
                 messages.success(request, f"Your account has been updated!")
                 return redirect('profile-update-page')
             else:
-                print(form.errors)
+                messages.error(request, f"Your account has not been updated!" + form.errors.as_text())
         else:
-            print(form_user.errors)
+            messages.error(request, f"Your account has not been updated!" + form_user.errors.as_text())
             form = FarmerUpdateForm(instance=request.user.profile)
     context = {'cities': City.objects.all(), 'states': State.objects.all()}
     return render(request, 'users/profile-update.html', context=context)
