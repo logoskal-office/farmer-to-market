@@ -9,7 +9,7 @@ class CaseInsensitiveModelBackend(ModelBackend):
         try:
             # Perform a case-insensitive lookup for the username
             user = UserModel._default_manager.get(**{
-                f'{UserModel.USERNAME_FIELD}__iexact': username
+                f"{UserModel.USERNAME_FIELD}__iexact": username
             })
         except UserModel.DoesNotExist:
             return None

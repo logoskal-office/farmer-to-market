@@ -26,7 +26,7 @@ class Farmer(models.Model):
         return self.account.first_name + ' ' + self.account.last_name
     
     def __str__(self):
-        return f'{self.account.first_name if self.account else ''} {self.account.last_name if self.account else ''} ({self.id})'
+        return f"{self.account.first_name if self.account else ''} {self.account.last_name if self.account else ''} ({self.id})"
 
 class City(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)

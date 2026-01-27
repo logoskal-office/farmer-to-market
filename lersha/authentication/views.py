@@ -13,7 +13,7 @@ def login_form(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Welcome Back {user.first_name}')
+                messages.success(request, f"Welcome Back {user.first_name}")
                 return redirect('profile-update-page')
 
         messages.error(request, 'Invalid credentials')

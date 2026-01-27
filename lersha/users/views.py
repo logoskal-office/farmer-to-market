@@ -21,7 +21,7 @@ def profile_update(request):
             if form.is_valid():
                 form.save()
                 form_user.save()
-                messages.success(request, f'Your account has been updated!')
+                messages.success(request, f"Your account has been updated!")
                 return redirect('profile-update-page')
             else:
                 print(form.errors)
@@ -132,7 +132,7 @@ def farmer_product_delete(request, product_id):
     product_name = product.name  # Save name for success message
     product.delete()
 
-    messages.success(request, f'Product "{product_name}" has been successfully deleted.')
+    messages.success(request, f"Product '{product_name}' has been successfully deleted.")
 
     # Redirect to a safe place after deletion
     return redirect('farmer-product-list')
