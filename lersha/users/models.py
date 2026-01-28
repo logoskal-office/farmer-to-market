@@ -32,7 +32,7 @@ class Farmer(models.Model):
         if self.account.is_active:
             if self.subscription.exists():
                 subscription = self.subscription.first()
-                if subscription.date + timedelta(days=30) > timezone.now():
+                if subscription.date + timedelta(days=30) > timezone.now().date():
                     return True
         return False
 
