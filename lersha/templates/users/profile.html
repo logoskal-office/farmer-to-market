@@ -15,8 +15,7 @@
 
     <!-- Hero / Identity Header -->
     <section class="max-w-6xl mx-auto px-4 mb-10">
-        <div
-            class="bg-bg-secondary rounded-2xl shadow-lg p-6 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div class="bg-bg-secondary rounded-2xl shadow-lg p-6 flex flex-col md:flex-row md:items-center md:justify-between">
             <div>
                 <h1 class="text-3xl font-bold text-primary-700">
                     👨‍🌾 {{ user.first_name }} {{ user.last_name }}
@@ -26,9 +25,8 @@
                 </p>
             </div>
 
-            {% if user.profile.is_subscribed %}
-            <span
-                class="mt-4 md:mt-0 inline-block px-4 py-2 text-sm font-semibold bg-primary-500 text-white rounded-full">
+            {% if farmer.is_active %}
+            <span class="mt-4 md:mt-0 inline-block px-4 py-2 text-sm font-semibold bg-primary-500 text-white rounded-full">
                 Trusted Farmer
             </span>
             {% else %}
@@ -46,25 +44,24 @@
         <aside class="bg-bg-secondary rounded-2xl shadow-lg p-6 text-center">
             <div class="flex justify-center mb-4">
                 <div class="w-48 h-48 relative">
-                    <img src="{% if user.profile.image %}{{ user.profile.image.url }}{% endif %}" alt="Farmer Image"
-                        class="w-full h-full object-cover rounded-full border-8 
-                        {% if user.profile.is_subscribed %}border-white{% else %}border-red-600{% endif %}
+                    <img src="{% if farmer.image %}{{ farmer.image.url }}{% endif %}" alt="Farmer Image" class="w-full h-full object-cover rounded-full border-8 
+                        {% if farmer.is_active %}border-green-600{% else %}border-red-600{% endif %}
                         shadow-xl" />
                 </div>
             </div>
 
             <h2 class="text-xl font-semibold text-primary-700">
-                {{ user.first_name }} {{ user.last_name }}
+                {{ farmer.account.first_name }} {{ farmer.account.last_name }}
             </h2>
 
             <p class="text-primary-600 text-sm mt-1">
-                {{ user.profile.address }}
+                {{ farmer.address }}
             </p>
 
             <p class="text-primary-700 text-sm mt-2">
                 {% for state in states %}
                 {% for city in state.cities.all %}
-                {% if city.id == user.profile.city.id %}
+                {% if city.id == farmer.city.id %}
                 {{ city }}, {{ state }}
                 {% endif %}
                 {% endfor %}
@@ -81,7 +78,7 @@
                     About the Farmer
                 </h3>
                 <p class="text-primary-900 leading-relaxed">
-                    {{ user.profile.description }}
+                    {{ farmer.bio }}
                 </p>
             </div>
 
@@ -97,7 +94,7 @@
                             Phone Number
                         </label>
                         <p class="text-primary-900">
-                            +251 {{ user.profile.phone_number }}
+                            +251 {{ farmer.phone_number }}
                         </p>
                     </div>
 
@@ -106,7 +103,7 @@
                             Email
                         </label>
                         <p class="text-primary-900">
-                            {{ user.email }}
+                            {{ farmer.account.email }}
                         </p>
                     </div>
                 </div>
@@ -114,13 +111,63 @@
 
             <!-- CTA -->
             <div class="flex justify-end">
-                <a href="#">
-                    <button
-                        class="px-6 py-3 bg-primary-500 text-white rounded-lg shadow hover:bg-primary-600 transition">
-                        Contact Farmer
+                <div class="flex items-center space-x-4">
+                    <button id="order-button" class="flex-1 bg-primary-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-primary-600 transition flex items-center justify-center">
+                        <i class="fas fa-cart-plus mr-2"></i> Contact Farmer
                     </button>
-                </a>
+                    <script>
+                        let order = document.getElementById('order-button')
+                        order.addEventListener('click', () => {
+                            const contact_modal = document.getElementById('contact-modal')
+                            contact_modal.classList.remove('hidden')
+                        })
+                    </script>
+
+                </div>
             </div>
+            <div id="contact-modal" class="fixed inset-0 bg-white/80 bg-opacity-100 flex justify-center hidden items-center transition">
+                <div class="bg-white p-4 rounded-lg shadow-xl w-full sm:w-96">
+                    <div class="w-full flex justify-end">
+                        <button id="close-modal" class="bg-error-primary text-white rounded-sm px-2  text-xl  hover:bg-error-primary-dark">
+                            X
+                        </button>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Mode of Contact</h2>
+                    <div class="flex flex-col gap-4">
+
+                        <!-- Call Option -->
+                        <a href="tel:+251{{farmer.phone_number}}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 text-lg text-center">
+                            Call
+                        </a>
+
+                        <!-- Text Option -->
+                        <a href="sms:+251{{farmer.phone_number}}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300 text-lg text-center">
+                            Text
+                        </a>
+
+                        <!-- WhatsApp Option -->
+                        <a href="https://wa.me/251{{farmer.phone_number}}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 text-lg text-center">
+                            WhatsApp
+                        </a>
+                        {% if farmer.account.email %}
+                        <a href="mailto:{{farmer.account.email}}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 text-lg text-center">
+                            Email
+                        </a>
+                        {% endif %}
+                    </div>
+
+                    <!-- Close Button -->
+
+                    <script>
+                        close_modal_button = document.getElementById('close-modal')
+                        close_modal_button.addEventListener('click', () => {
+                            const contact_modal = document.getElementById('contact-modal')
+                            contact_modal.classList.add('hidden');
+                        });
+                    </script>
+                </div>
+            </div>
+
 
         </section>
     </main>

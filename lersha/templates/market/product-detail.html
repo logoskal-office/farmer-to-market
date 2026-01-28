@@ -121,7 +121,7 @@
                 </a>
 
                 <!-- Text Option -->
-                <a href="sms:+251{{product.farmer.phone_number}}&body=Hello, I'd like to order {{product.name}}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300 text-lg text-center">
+                <a href="sms:+251{{product.farmer.phone_number}}?body=Hello, I'd like to order {{product.name}}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300 text-lg text-center">
                     Text
                 </a>
 
@@ -129,6 +129,11 @@
                 <a href="https://wa.me/251{{product.farmer.phone_number}}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 text-lg text-center">
                     WhatsApp
                 </a>
+                {% if product.farmer.account.email %}
+                <a href="mailto:{{product.farmer.account.email}}?body=Hello, I'd like to order {{product.name}}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 text-lg text-center">
+                    Email
+                </a>
+                {% endif %}
             </div>
 
             <!-- Close Button -->
