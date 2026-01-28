@@ -52,5 +52,5 @@ class State(models.Model):
 
 class Subscription(models.Model):
     farmer = models.ForeignKey(Farmer, related_name='subscription', on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     

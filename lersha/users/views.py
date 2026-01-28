@@ -171,16 +171,22 @@ def subcribe(request):
         farmer.save()
 
 def subscription_activator(request):
-    trx_ref = request.GET.get('trx_ref')
-    if trx_ref is not None:
-        print('Hellloooooo')
-        subcription = Subscription.objects.get(tx_ref=trx_ref)
-        if subcription is not None:
-            print(trx_ref)
-            print(subcription)
-            subcription.subscription_date = timezone.now()
-            subcription.save()
-            messages.success(request, f'Successfully Subscribed')
+    # trx_ref = request.GET.get('trx_ref')
+    # if trx_ref is not None:
+    #     print('Hellloooooo')
+    #     subcription = Subscription.objects.get(tx_ref=trx_ref)
+    #     if subcription is not None:
+    #         print(trx_ref)
+    #         print(subcription)
+    farmer = request.user.profile
+    subscription = farmer.subscription.first()
+    if subscription is not None:
+        subscription.date = timezone.now()
+        subscription.save()
+    else:
+        subscription = Subscription.objects.create(farmer=farmer, date=timezone.now())
+        subscription.save()
+    messages.success(request, f'Successfully Subscribed')
     return redirect('profile-page')
 
 def subscripiton_verifier(request, pk):
