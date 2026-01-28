@@ -17,7 +17,7 @@
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-primary-700">👨‍🌾 Your Profile</h1>
             <p class="text-primary-600 mt-2">Manage your details and keep an eye on your harvest dashboard.</p>
-            {% if not user.profile.is_active() %}
+            {% if not user.profile.is_active %}
             <p class="text-red-600 mt-2 text-xl">You seem to not be subscribed. <a href="{% url 'subscribe-page' %}" class="text-primary-500 font-semibold underline">Subscribe</a> to access special features.</p>
             {% endif %}
         </div>
