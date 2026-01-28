@@ -8,6 +8,6 @@ urlpatterns = [
     path('profile/my-products/<int:pk>/', farmer_products_detail, name='farmer-product-detail'),
     path('product/<int:product_id>/delete/', farmer_product_delete, name='farmer-product-delete'),
     path('product/create/', farmer_product_create, name='farmer-product-create'),
-    path('subscribe/', subcribe, name='subscribe'),
+    path('subscribe/', subcribe, name='subscribe-page'),
     path('subscription/activate/', subscription_activator, name='subscription-activator'),
 ]

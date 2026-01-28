@@ -1073,6 +1073,9 @@
   .text-primary-900 {
     color: var(--color-primary-900);
   }
+  .text-red-600 {
+    color: var(--color-red-600);
+  }
   .text-red-700 {
     color: var(--color-red-700);
   }

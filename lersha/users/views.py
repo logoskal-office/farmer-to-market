@@ -182,3 +182,6 @@ def subscription_activator(request):
             subcription.save()
             messages.success(request, f'Successfully Subscribed')
     return redirect('profile-page')
+
+def subscripiton_verifier(request, pk):
+    pass
