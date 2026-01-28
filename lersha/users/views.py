@@ -183,11 +183,12 @@ def subscription_activator(request):
     if subscription is not None:
         subscription.date = timezone.now()
         subscription.save()
+        messages.success(request, f'Successfully Subscribed')
     else:
         subscription = Subscription.objects.create(farmer=farmer, date=timezone.now())
         subscription.save()
-    messages.success(request, f'Successfully Subscribed')
-    return redirect('profile-page')
+        messages.success(request, f'Successfully Subscribed')
+    return redirect('profile-update-page')
 
 def subscripiton_verifier(request, pk):
     pass

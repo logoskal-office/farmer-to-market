@@ -17,7 +17,9 @@
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-primary-700">👨‍🌾 Your Profile</h1>
             <p class="text-primary-600 mt-2">Manage your details and keep an eye on your harvest dashboard.</p>
+            {% if not user.profile.is_active() %}
             <p class="text-red-600 mt-2 text-xl">You seem to not be subscribed. <a href="{% url 'subscribe-page' %}" class="text-primary-500 font-semibold underline">Subscribe</a> to access special features.</p>
+            {% endif %}
         </div>
 
         <!-- Profile Form -->
@@ -40,7 +42,7 @@
                         <label for="upload" class="cursor-pointer block">
                             <div class="relative w-64 h-64">
                                 <!-- The actual circular image -->
-                                <img id="preview" src="{% if user.profile.image %}{{user.profile.image.url}}{% endif %}" alt="Profile" class="w-full h-full object-cover rounded-full border-8 {% if user.profile.is_subscribed %} border-green-600 {% else %} border-red-600 {% endif %} shadow-2xl 
+                                <img id="preview" src="{% if user.profile.image %}{{user.profile.image.url}}{% endif %}" alt="Profile" class="w-full h-full object-cover rounded-full border-8 {% if user.profile.is_active %} border-green-600 {% else %} border-red-600 {% endif %} shadow-2xl 
                                     transition-transform duration-300 hover:scale-105" />
 
                                 <!-- Hover overlay – stays perfectly circular -->
