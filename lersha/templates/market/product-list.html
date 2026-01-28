@@ -106,6 +106,9 @@
             });
         </script>
 
+        {% if not products %}
+        <div class="w-full h-full flex items-center justify-center text-center text-6xl text-green-700">No products found.</div>
+        {% endif %}
         <!-- Products Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
             <!-- Product Card 1 -->
@@ -123,16 +126,15 @@
                         <h3 class="text-xl font-semibold text-gray-800 mb-1">{{product.name}}</h3>
                         <p class="text-gray-600 mb-1">{{product.description|truncatechars:50}}</p>
                         <div class="flex flex-col justify-between items-start gap-2 ">
-                            <span class="text-xl font-bold text-green-700">${{product.price|intcomma}}/{{product.quantity_unit}}</span>
+                            <span class="text-xl font-bold text-green-700">{{product.price|intcomma}} Birr/{{product.quantity_unit}}</span>
 
                         </div>
                     </div>
                 </a>
             </div>
             {% endfor %}
-
             <!-- Product Card 2 -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+            <!-- <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1567206563060-55a9af775220?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Carrots" class="w-full h-56 object-cover">
                 </div>
@@ -146,11 +148,11 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Repeat similar cards for more products -->
             <!-- Product Card 3 -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+            <!-- <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1586201375761-8385cb5529d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Honey" class="w-full h-56 object-cover">
                     <span class="absolute top-2 right-2 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Local</span>
@@ -165,10 +167,10 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Product Card 4 -->
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+            <!-- <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Apples" class="w-full h-56 object-cover">
                 </div>
@@ -182,7 +184,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Add more product cards as needed -->
         </div>
 

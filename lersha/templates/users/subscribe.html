@@ -21,7 +21,7 @@
             <input type="hidden" name="amount" value="500" />
             <input type="hidden" name="currency" value="ETB" />
             {% if user.email %}
-            <input type="hidden" name="email" value="user.email" />
+            <input type="hidden" name="email" value="{{user.email}}" />
             {% endif %}
             <input type="hidden" name="first_name" value="{{user.first_name}}" />
             <input type="hidden" name="last_name" value="{{user.last_name}}" />

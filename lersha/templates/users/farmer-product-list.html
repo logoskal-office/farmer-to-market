@@ -20,11 +20,9 @@
         <!-- Filters & Search Bar -->
         <div class="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div class="w-full md:w-96 flex items-center gap-4">
-                <input id="search" type="text" placeholder="Search products..."
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <input id="search" type="text" placeholder="Search products..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                 {% if request.user.is_authenticated and request.user.profile %}
-                <a href="{% url 'farmer-product-create' %}"
-                    class="bg-green-600 text-gray-50 p-4 w-16 h-10 flex items-center justify-center rounded-lg cursor-pointer">
+                <a href="{% url 'farmer-product-create' %}" class="bg-green-600 text-gray-50 p-4 w-16 h-10 flex items-center justify-center rounded-lg cursor-pointer">
                     Add
                 </a>
                 {% endif %}
@@ -32,8 +30,7 @@
 
             <div class="flex flex-wrap gap-4 items-center">
                 <!-- Category -->
-                <select id="category"
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <select id="category" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="">All Categories</option>
                     {% for category in categories %}
                     <option value="{{ category.id }}">{{ category }}</option>
@@ -41,12 +38,10 @@
                 </select>
 
                 <!-- Min Price -->
-                <input type="number" id="price_min" min="0" placeholder="Min price"
-                    class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <input type="number" id="price_min" min="0" placeholder="Min price" class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
 
                 <!-- Max Price -->
-                <input type="number" id="price_max" min="0" placeholder="Max price"
-                    class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <input type="number" id="price_max" min="0" placeholder="Max price" class="w-28 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
             </div>
         </div>
 
@@ -110,7 +105,9 @@
                 updateURLParam("price_max", this.value);
             });
         </script>
-
+        {% if not products %}
+        <div class="w-full h-full flex items-center justify-center text-center text-6xl text-green-700">You Have No Products Listed.</div>
+        {% endif %}
         <!-- Products Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
             <!-- Product Card 1 -->
@@ -121,16 +118,14 @@
                         <img src="{{product.image.url}}" alt="Fresh Tomatoes" class="w-full h-56 object-cover">
 
                         {% if product.organic %}
-                        <span
-                            class="absolute top-2 right-2 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Organic</span>
+                        <span class="absolute top-2 right-2 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">Organic</span>
                         {% endif %}
                     </div>
                     <div class="p-5">
                         <h3 class="text-xl font-semibold text-gray-800 mb-1">{{product.name}}</h3>
                         <p class="text-gray-600 mb-1">{{product.description|truncatechars:50}}</p>
                         <div class="flex flex-col justify-between items-start gap-2 ">
-                            <span
-                                class="text-xl font-bold text-green-700">${{product.price|intcomma}}/{{product.quantity_unit}}</span>
+                            <span class="text-xl font-bold text-green-700">${{product.price|intcomma}}/{{product.quantity_unit}}</span>
 
                         </div>
                     </div>
@@ -146,8 +141,7 @@
     <div class="mt-10 flex justify-center gap-2">
 
         {% if products.has_previous %}
-        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.previous_page_number }}"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.previous_page_number }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             Prev
         </a>
         {% endif %}
@@ -158,16 +152,14 @@
             {{ num }}
         </span>
         {% else %}
-        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ num }}"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ num }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             {{ num }}
         </a>
         {% endif %}
         {% endfor %}
 
         {% if products.has_next %}
-        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.next_page_number }}"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+        <a href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.next_page_number }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
             Next
         </a>
         {% endif %}
