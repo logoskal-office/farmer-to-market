@@ -17,7 +17,7 @@ def is_subscribed(view_func):
     def wrapper(request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user.has_profile():
-                if request.user.profile.subscription.first().is_active():
+                if request.user.profile.is_active():
                     return view_func(request, *args, **kwargs)
         return redirect('subscribe-page')
     return wrapper

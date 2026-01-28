@@ -23,8 +23,7 @@
                 <!-- Image Gallery -->
                 <div class="space-y-4">
                     <div class="aspect-square overflow-hidden rounded-xl border-2 border-gray-200 bg-bg-secondary">
-                        <img src="{{product.image.url}}" alt="Fresh Organic Tomatoes"
-                            class="w-full h-full object-cover">
+                        <img src="{{product.image.url}}" alt="Fresh Organic Tomatoes" class="w-full h-full object-cover">
                     </div>
                     <!-- <div class="grid grid-cols-4 gap-4">
                         <img src="https://via.placeholder.com/200?text=Tomato+1" alt="Thumbnail 1" class="rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary-500 transition">
@@ -38,18 +37,8 @@
                 <div class="flex flex-col justify-between">
                     <div>
                         <h1 class="text-4xl font-bold text-gray-900 mb-4">{{product.name}}</h1>
-                        <div class="flex items-center mb-6">
-                            <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="ml-2 text-gray-600">(4.8 • 124 reviews)</span>
-                        </div>
-                        <p class="text-3xl font-bold text-primary-500 mb-6">{{product.price}} <span
-                                class="text-lg font-normal text-gray-500">per {{product.quantity_unit}}</span></p>
+
+                        <p class="text-3xl font-bold text-primary-500 mb-6">{{product.price}} <span class="text-lg font-normal text-gray-500">per {{product.quantity_unit}}</span></p>
 
                         <div class="mb-8 bg-bg-secondary p-6 rounded-xl">
                             <h3 class="text-lg font-semibold text-gray-900 mb-3">Description</h3>
@@ -61,8 +50,7 @@
                         <div class="grid grid-cols-2 gap-6 mb-8">
                             <div class="bg-bg-secondary p-4 rounded-lg">
                                 <h4 class="font-medium text-gray-900">Farmer</h4>
-                                <a href="{% url 'profile-page' product.farmer.id %}"
-                                    class="text-blue-700">{{product.farmer.get_name}}</a>
+                                <a href="{% url 'profile-page' product.farmer.id %}" class="text-blue-700">{{product.farmer.get_name}}</a>
                             </div>
                             <div class="bg-bg-secondary p-4 rounded-lg">
                                 <h4 class="font-medium text-gray-900">Location</h4>
@@ -90,10 +78,8 @@
                         </div>
 
                         <div class="flex items-center space-x-4">
-                            <input type="number" min="1" max="{{product.stock|floatformat:1}}" step="0.1" value="1"
-                                class="w-28 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500">
-                            <button id="order-button"
-                                class="flex-1 bg-primary-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-primary-600 transition flex items-center justify-center">
+                            <input type="number" min="1" max="{{product.stock|floatformat:1}}" step="0.1" value="1" class="w-28 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500">
+                            <button id="order-button" class="flex-1 bg-primary-500 text-white py-3 px-8 rounded-lg font-medium hover:bg-primary-600 transition flex items-center justify-center">
                                 <i class="fas fa-cart-plus mr-2"></i> Make An Order
                             </button>
                             <script>
@@ -122,12 +108,10 @@
     <!-- Button to open the modal -->
 
     <!-- Modal Background -->
-    <div id="contact-modal"
-        class="fixed inset-0 bg-white/80 bg-opacity-100 flex justify-center hidden items-center transition">
+    <div id="contact-modal" class="fixed inset-0 bg-white/80 bg-opacity-100 flex justify-center hidden items-center transition">
         <div class="bg-white p-4 rounded-lg shadow-xl w-full sm:w-96">
             <div class="w-full flex justify-end">
-                <button id="close-modal"
-                    class="bg-error-primary text-white rounded-sm px-2  text-xl  hover:bg-error-primary-dark">
+                <button id="close-modal" class="bg-error-primary text-white rounded-sm px-2  text-xl  hover:bg-error-primary-dark">
                     X
                 </button>
             </div>
@@ -135,20 +119,17 @@
             <div class="flex flex-col gap-4">
 
                 <!-- Call Option -->
-                <a href="tel:+251{{product.farmer.phone_number}}"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 text-lg text-center">
+                <a href="tel:+251{{product.farmer.phone_number}}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 text-lg text-center">
                     Call
                 </a>
 
                 <!-- Text Option -->
-                <a href="sms:+251{{product.farmer.phone_number}}&body=Hello, I'd like to order {{product.title}}"
-                    class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300 text-lg text-center">
+                <a href="sms:+251{{product.farmer.phone_number}}&body=Hello, I'd like to order {{product.title}}" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition duration-300 text-lg text-center">
                     Text
                 </a>
 
                 <!-- WhatsApp Option -->
-                <a href="https://wa.me/251{{product.farmer.phone_number}}"
-                    class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 text-lg text-center">
+                <a href="https://wa.me/251{{product.farmer.phone_number}}" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 text-lg text-center">
                     WhatsApp
                 </a>
             </div>

@@ -21,7 +21,7 @@
         <div class="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div class="w-full md:w-96 flex items-center gap-2">
                 <input id="search" type="text" placeholder="Search products..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-                {% if request.user.is_authenticated and not request.user.is_staff %}
+                {% if request.user.is_authenticated and request.user.profile %}
                 <a href="{% url 'farmer-product-create' %}" class="bg-green-600 text-gray-50 p-4 w-16 h-10 flex items-center justify-center rounded-lg cursor-pointer">
                     Add
                 </a>
