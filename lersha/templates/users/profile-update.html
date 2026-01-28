@@ -39,7 +39,7 @@
                         <label for="upload" class="cursor-pointer block">
                             <div class="relative w-64 h-64">
                                 <!-- The actual circular image -->
-                                <img id="preview" src="{% if user.profile.image %}{{user.profile.image.url}}{% endif %}" alt="Profile" class="w-full h-full object-cover rounded-full border-8 {% if user.profile.is_subscribed %} border-white {% else %} border-red-600 {% endif %} shadow-2xl 
+                                <img id="preview" src="{% if user.profile.image %}{{user.profile.image.url}}{% endif %}" alt="Profile" class="w-full h-full object-cover rounded-full border-8 {% if user.profile.is_subscribed %} border-green-600 {% else %} border-red-600 {% endif %} shadow-2xl 
                                     transition-transform duration-300 hover:scale-105" />
 
                                 <!-- Hover overlay – stays perfectly circular -->

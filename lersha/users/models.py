@@ -28,6 +28,15 @@ class Farmer(models.Model):
     def __str__(self):
         return f"{self.account.first_name if self.account else ''} {self.account.last_name if self.account else ''} ({self.id})"
 
+    def is_active(self):
+        if self.account.is_active:
+            if self.subscription.exists():
+                subscription = self.subscription.first()
+                if subscription.date + timedelta(days=30) > timezone.now():
+                    return True
+        return False
+
+
 class City(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     state = models.ForeignKey('State', related_name='cities', null=True, blank=True, on_delete=models.SET_NULL)
@@ -40,3 +49,8 @@ class State(models.Model):
 
     def __str__(self):
         return self.name
+
+class Subscription(models.Model):
+    farmer = models.ForeignKey(Farmer, related_name='subscription', on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    

@@ -10,7 +10,8 @@ from django.db.models import Q
 from users.models import State, City
 from market.models import Product, Category
 from .forms import FarmerUpdateForm, FarmerUserUpdateForm, ProductUpdateForm, ProductForm
-from .decorators import is_farmer
+from .decorators import is_farmer, is_subscribed
+from users.models import Subscription
 
 @is_farmer
 def profile_update(request):
@@ -138,7 +139,7 @@ def farmer_product_delete(request, product_id):
     # Redirect to a safe place after deletion
     return redirect('farmer-product-list')
 
-@is_farmer
+@is_subscribed
 def farmer_product_create(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
@@ -156,26 +157,28 @@ def farmer_product_create(request):
     return render(request, 'users/farmer-product-create.html', {'form': form, 'categories': Category.objects.all()})
 
 
-# def subcribe(request):
-#     tx_ref = uuid4()
-#     farmer = request.user.profile.first()
-#     if farmer.subscription is None:
-#         farmer.subscription = Subscription.objects.create(tx_ref=request.user.username + '-' + str(tx_ref))
-#         farmer.save()
-#         print(farmer.subscription.is_subscribed())
-#         return render(request, 'users/subscribe.html', {'tx_ref': request.user.username + '-' + str(tx_ref)})
-#     else:
-#         pass
+def subcribe(request):
+    tx_ref = uuid4()
+    farmer = request.user.profile
+    if farmer.subscription.first() is not None:
+        print(farmer.subscription)
+        messages.error(request, "You are already subscribed.")
+        return redirect('profile-update-page')
+    else:
+        print(1)
+        return render(request, 'users/subscribe.html', {'tx_ref': request.user.username + '-' + str(tx_ref)})
+        # farmer.subscription = Subscription.objects.create(tx_ref=request.user.username + '-' + str(tx_ref))
+        farmer.save()
 
-# def subscription_activator(request):
-#     trx_ref = request.GET.get('trx_ref')
-#     if trx_ref is not None:
-#         print('Hellloooooo')
-#         subcription = Subscription.objects.get(tx_ref=trx_ref)
-#         if subcription is not None:
-#             print(trx_ref)
-#             print(subcription)
-#             subcription.subscription_date = timezone.now()
-#             subcription.save()
-#             messages.success(request, f'Successfully Subscribed')
-#     return redirect('profile-page')
+def subscription_activator(request):
+    trx_ref = request.GET.get('trx_ref')
+    if trx_ref is not None:
+        print('Hellloooooo')
+        subcription = Subscription.objects.get(tx_ref=trx_ref)
+        if subcription is not None:
+            print(trx_ref)
+            print(subcription)
+            subcription.subscription_date = timezone.now()
+            subcription.save()
+            messages.success(request, f'Successfully Subscribed')
+    return redirect('profile-page')

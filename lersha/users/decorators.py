@@ -11,3 +11,13 @@ def is_farmer(view_func):
                 return view_func(request, *args, **kwargs)
         return redirect('login-page')
     return wrapper
+
+def is_subscribed(view_func):
+    @login_required
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.has_profile():
+                if request.user.profile.is_active():
+                    return view_func(request, *args, **kwargs)
+        return redirect('login-page')
+    return wrapper

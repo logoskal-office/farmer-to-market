@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import profile_update, profile, farmer_products_list, farmer_products_detail, farmer_product_delete, farmer_product_create
+from .views import profile_update, profile, farmer_products_list, farmer_products_detail, farmer_product_delete, farmer_product_create, subcribe, subscription_activator
 
 urlpatterns = [
     path('profile/', profile_update, name='profile-update-page'),
@@ -7,5 +7,7 @@ urlpatterns = [
     path('profile/my-products', farmer_products_list, name='farmer-product-list'),
     path('profile/my-products/<int:pk>/', farmer_products_detail, name='farmer-product-detail'),
     path('product/<int:product_id>/delete/', farmer_product_delete, name='farmer-product-delete'),
-    path('product/create/', farmer_product_create, name='farmer-product-create')
+    path('product/create/', farmer_product_create, name='farmer-product-create'),
+    path('subscribe/', subcribe, name='subscribe'),
+    path('subscription/activate/', subscription_activator, name='subscription-activator'),
 ]
