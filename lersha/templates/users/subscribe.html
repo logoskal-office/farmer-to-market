@@ -28,8 +28,8 @@
             <input type="hidden" name="title" value="Monthly Subscription Payment" />
             <input type="hidden" name="description" value="Enter Payment Details Here" />
             <input type="hidden" name="logo" value="https://chapa.link/asset/images/chapa_swirl.svg" />
-            <input type="hidden" name="callback_url" value="https://psalms.pythonanywhere.com/users/subscription-activator/" />
-            <input type="hidden" name="return_url" value="https://psalms.pythonanywhere.com/users/profile/" />
+            <input type="hidden" name="callback_url" value="https://psalms.pythonanywhere.com{% url 'subscription-activator' %}" />
+            <input type="hidden" name="return_url" value="https://psalms.pythonanywhere.com{% url 'subscription-activator' %}" />
             <input type="hidden" name="meta[title]" value="Lersha Monthly Subscription" />
             <button type="submit" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors">
                 Subscribe Now
